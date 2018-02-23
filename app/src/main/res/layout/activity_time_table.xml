@@ -6,11 +6,41 @@
     android:layout_height="match_parent"
     tools:context="univ.pr.nj.keewitz.TimeTableActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="216dp"
-        android:layout_height="66dp"
-        android:text="HELLO TIME TABLE ACTIVITY"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="199dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="396dp"
+            android:layout_height="wrap_content"
+            android:text="@string/my_time_table"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <WebView
+            android:id="@+id/time_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="64dp">
+
+        </WebView>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
