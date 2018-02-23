@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "56739112277",
+    "firebase_url": "https://keewitz-68f5c.firebaseio.com",
+    "project_id": "keewitz-68f5c",
+    "storage_bucket": "keewitz-68f5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56739112277:android:07d01bef70a07469",
+        "android_client_info": {
+          "package_name": "univ.pr.nj.keewitz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56739112277-ibl3bjmi8c88td8rgnbg5s6d7cptbjkp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMQJY2KFu8jcVMtUHhO2vnii0fZLTPB78"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
