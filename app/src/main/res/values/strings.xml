@@ -4,4 +4,5 @@
     <string name="home_page_mesCours">Mes Cours</string>
     <string name="home_page_parametres">Paramètres</string>
     <string name="my_time_table">Mon Emploi du Temps</string>
+    <string name="user_name">My user name</string>
 </resources>

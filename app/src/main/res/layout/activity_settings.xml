@@ -6,11 +6,4 @@
     android:layout_height="match_parent"
     tools:context="univ.pr.nj.keewitz.SettingsActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="202dp"
-        android:layout_height="74dp"
-        android:text="HELLO SETTINGS ACTIVITY"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="180dp" />
 </android.support.constraint.ConstraintLayout>
