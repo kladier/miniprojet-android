@@ -5,4 +5,15 @@
     <string name="home_page_parametres">Paramètres</string>
     <string name="my_time_table">Mon Emploi du Temps</string>
     <string name="user_name">My user name</string>
+
+    <!-- MENU -->
+    <string name="search">Search</string>
+    <string name="search_hint">Search a point of interest</string>
+
+    <!-- MAP -->
+    <!-- Dialog box to save point of interest -->
+    <string name="dialog_title">Save as point of interest ?</string>
+    <string name="dialog_save">Save</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="help">Tap on the map to set save new point of interest</string>
 </resources>
