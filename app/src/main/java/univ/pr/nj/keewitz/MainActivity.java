@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
     }
 
@@ -23,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSettingsButtonClick(View view) {
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    public void onScanQRCode(View view) {
+        startActivity(new Intent(this, ScanQRCodeActivity.class));
     }
 }

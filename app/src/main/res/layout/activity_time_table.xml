@@ -20,7 +20,7 @@
             android:id="@+id/textView3"
             android:layout_width="396dp"
             android:layout_height="wrap_content"
-            android:text="@string/my_time_table"
+            android:text="@string/title_time_table"
             android:textAlignment="center"
             android:textSize="24sp" />
 

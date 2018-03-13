@@ -22,6 +22,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
         <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".ScanQRCodeActivity"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD2XRSZ5z7NKHISiSet-XsOYi6iD7n3p2s"/>
