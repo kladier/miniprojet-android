@@ -16,13 +16,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TimeTableActivity" />
-        <activity android:name=".MapActivity">
+        <activity android:name=".TimeTableActivity"
+            android:parentActivityName="univ.pr.nj.keewitz.MainActivity"/>
+        <activity android:name=".MapActivity"
+            android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".ScanQRCodeActivity"></activity>
+        <activity android:name=".SettingsActivity"
+            android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
+        </activity>
+        <activity android:name=".ScanQRCodeActivity"
+            android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD2XRSZ5z7NKHISiSet-XsOYi6iD7n3p2s"/>
