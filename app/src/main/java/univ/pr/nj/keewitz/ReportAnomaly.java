@@ -28,11 +28,6 @@ import univ.pr.nj.keewitz.utils.FirebaseUtils;
 
 public class ReportAnomaly extends AppCompatActivity {
 
-
-//    private FirebaseStorage storage;
-//    private StorageReference storageReference;
-//    private FirebaseAuth mAuth;
-
     private Uri imageUri;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -47,35 +42,13 @@ public class ReportAnomaly extends AppCompatActivity {
                 0);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-//        mAuth = FirebaseAuth.getInstance();
-//        mAuth.signInAnonymously();
-        //Example : write in Firebase
-//        DatabaseReference mDB = FirebaseDatabase.getInstance().getReference();
-//        mDB.child("test").setValue("I am ANONYMOUS");
-        //Example : get a value from Firebase
-//        mDB.child("buildings").child("U4").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                System.out.println(snapshot.getValue());
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        });
-        FirebaseUtils.writeValue("WE ARE LEGION", "test","testchild");
-//        String v = FirebaseUtils.readValue("test","testchild");
-//        System.out.println(v);
-//        takePhoto();
+        takePhoto();
     }
 
     public void takePhoto() {
-        //Création d'un intent
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-
-        //Création du fichier image
-        File photo = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(photo));
+        File photo = new File(Environment.getExternalStorageDirectory(), "photo.png");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
         imageUri = Uri.fromFile(photo);
 
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
@@ -88,9 +61,6 @@ public class ReportAnomaly extends AppCompatActivity {
             case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
                     Long timestamp = System.currentTimeMillis()/1000;
-//                    storage = FirebaseStorage.getInstance();
-//                    storageReference = storage.getReference("anomalies/img-"+timestamp.toString()+".png");
-//                    UploadTask uploadTask = storageReference.putFile(imageUri);
                     FirebaseUtils.putFile("anomalies/img-"+timestamp.toString()+".png", imageUri);
                 }
         }
