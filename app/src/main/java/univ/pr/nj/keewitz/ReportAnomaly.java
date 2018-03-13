@@ -23,13 +23,15 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
+
 
 public class ReportAnomaly extends AppCompatActivity {
 
 
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
-    private FirebaseAuth mAuth;
+//    private FirebaseStorage storage;
+//    private StorageReference storageReference;
+//    private FirebaseAuth mAuth;
 
     private Uri imageUri;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -45,8 +47,8 @@ public class ReportAnomaly extends AppCompatActivity {
                 0);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInAnonymously();
+//        mAuth = FirebaseAuth.getInstance();
+//        mAuth.signInAnonymously();
         //Example : write in Firebase
 //        DatabaseReference mDB = FirebaseDatabase.getInstance().getReference();
 //        mDB.child("test").setValue("I am ANONYMOUS");
@@ -60,7 +62,10 @@ public class ReportAnomaly extends AppCompatActivity {
 //            public void onCancelled(DatabaseError databaseError) {
 //            }
 //        });
-        takePhoto();
+        FirebaseUtils.writeValue("WE ARE LEGION", "test","testchild");
+//        String v = FirebaseUtils.readValue("test","testchild");
+//        System.out.println(v);
+//        takePhoto();
     }
 
     public void takePhoto() {
@@ -83,9 +88,10 @@ public class ReportAnomaly extends AppCompatActivity {
             case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
                     Long timestamp = System.currentTimeMillis()/1000;
-                    storage = FirebaseStorage.getInstance();
-                    storageReference = storage.getReference("anomalies/img-"+timestamp.toString()+".png");
-                    UploadTask uploadTask = storageReference.putFile(imageUri);
+//                    storage = FirebaseStorage.getInstance();
+//                    storageReference = storage.getReference("anomalies/img-"+timestamp.toString()+".png");
+//                    UploadTask uploadTask = storageReference.putFile(imageUri);
+                    FirebaseUtils.putFile("anomalies/img-"+timestamp.toString()+".png", imageUri);
                 }
         }
     }
