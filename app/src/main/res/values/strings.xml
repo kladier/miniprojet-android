@@ -10,6 +10,8 @@
     <string name="home_page_settings_desc">Settings of the app</string>
     <string name="home_page_qrcode">QR Code</string>
     <string name="home_page_qrcode_desc">Scan a QR to retrieve your documents</string>
+    <string name="home_page_infos">Informations</string>
+    <string name="home_page_infos_desc">Authors informations, luminosity and noise level</string>
 
 
     <!-- TIME TABLE -->

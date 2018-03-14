@@ -15,7 +15,7 @@ import univ.pr.nj.keewitz.utils.FirebaseUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView map, settings, timetable, qrcode;
+    CardView map, settings, timetable, qrcode, infos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settings = findViewById(R.id.settings);
         timetable = findViewById(R.id.time_table);
         qrcode = findViewById(R.id.qrcode);
+        infos = findViewById(R.id.informations);
 
         map.setOnClickListener(this);
         settings.setOnClickListener(this);
         timetable.setOnClickListener(this);
         qrcode.setOnClickListener(this);
+        infos.setOnClickListener(this);
 
         this.exampleFirebase();
 
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.qrcode:
                 startActivity(new Intent(this, ScanQRCodeActivity.class));
+                break;
+            case R.id.informations:
+                startActivity(new Intent(this, InformationActivity.class));
                 break;
             default:
                 Log.d(this.getClass().getCanonicalName(), "You forgot to set the startActivity binding with your new button");
