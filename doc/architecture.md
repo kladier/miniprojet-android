@@ -50,6 +50,16 @@ graph BT;
 La `MainActivity` ne sert juste que d'interface home par laquelle on lance les autres activités.
 Pour isoler les contextes nous avons préféré utiliser des `AppCompatActivity` au lieu de `Fragment`.
 
+Toutes les activitées sont `Children` de `MainActivity`:
+
+```java
+<activity android:name=".*Activity"
+    android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
+            ^^^^^^^^^^^^^^^^^^
+</activity>
+```
+
+De plus, elle utilise un [Up Navigation](https://developer.android.com/training/implementing-navigation/ancestral.html) qui offre un bouton en forme de flêche sur la barre de `Menu` pour revenir à la `MainActivity`.
 
 ### Librairies
 
