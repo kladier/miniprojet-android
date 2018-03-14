@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -56,6 +58,8 @@ public class MapActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         myAdapter = new SimpleCursorAdapter(
             this,
@@ -188,6 +192,18 @@ public class MapActivity extends AppCompatActivity
             enableMyLocation();
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     /**
      * Move the google Map with a translate effect

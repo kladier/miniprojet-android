@@ -1,7 +1,9 @@
 package univ.pr.nj.keewitz;
 
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.webkit.WebView;
 
 public class TimeTableActivity extends AppCompatActivity {
@@ -10,6 +12,8 @@ public class TimeTableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WebView wb = (WebView) findViewById(R.id.time_table);
         wb.getSettings().setJavaScriptEnabled(true);
@@ -23,5 +27,16 @@ public class TimeTableActivity extends AppCompatActivity {
             url = getResources().getString(R.string.default_url_time_table);
         }
         wb.loadUrl(url);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
