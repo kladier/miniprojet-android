@@ -13,6 +13,13 @@
     <string name="home_page_infos">Informations</string>
     <string name="home_page_infos_desc">Authors informations, luminosity and noise level</string>
 
+    <!-- REPORT ANOMALY -->
+    <string name="criticity_prompt">Chose a criticity level</string>
+    <string-array name="criticity_array">
+        <item>Comfort</item>
+        <item>Danger</item>
+        <item>Problem</item>
+    </string-array>
 
     <!-- TIME TABLE -->
     <string name="title_time_table">My agenda</string>
