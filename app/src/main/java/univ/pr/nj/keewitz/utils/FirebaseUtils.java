@@ -33,15 +33,13 @@ public final class FirebaseUtils {
         mDB.setValue(value);
     }
 
-    public static String readValue(ValueEventListener valueEventListener, String... path){
-        final String[] value = null;
+    public static void readValue(ValueEventListener valueEventListener, String... path){
         mAuth.signInAnonymously();
         DatabaseReference mDB = FirebaseDatabase.getInstance().getReference();
         for (String p : path) {
             mDB = mDB.child(p);
         }
         mDB.addListenerForSingleValueEvent(valueEventListener);
-        return "";
     }
 
 }
