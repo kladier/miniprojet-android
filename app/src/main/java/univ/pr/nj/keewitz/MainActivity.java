@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.view.View;=
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        
+
         map = findViewById(R.id.map);
         settings = findViewById(R.id.settings);
         timetable = findViewById(R.id.time_table);
@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settings.setOnClickListener(this);
         timetable.setOnClickListener(this);
         qrcode.setOnClickListener(this);
+
+        this.exampleFirebase();
+
     }
 
     @Override
@@ -52,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 Log.d(this.getClass().getCanonicalName(), "You forgot to set the startActivity binding with your new button");
         }
-        this.exampleFirebase();
     }
 
     public void exampleFirebase() {
