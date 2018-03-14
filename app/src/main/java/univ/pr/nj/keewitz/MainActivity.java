@@ -7,6 +7,12 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     CardView map, settings, timetable, qrcode;
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settings.setOnClickListener(this);
         timetable.setOnClickListener(this);
         qrcode.setOnClickListener(this);
+
+        this.exampleFirebase();
+
     }
 
     @Override
@@ -46,5 +55,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 Log.d(this.getClass().getCanonicalName(), "You forgot to set the startActivity binding with your new button");
         }
+    }
+
+    public void exampleFirebase() {
+        FirebaseUtils.writeValue("myValue", "level1", "level2");
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Log.w("MainActivity.class", (String)snapshot.getValue());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+
+        FirebaseUtils.readValue(valueEventListener, "level1", "level2");
     }
 }
