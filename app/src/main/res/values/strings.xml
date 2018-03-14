@@ -2,16 +2,18 @@
     <string name="app_name">KEEWITZ</string>
 
     <!-- HOME MENU -->
-    <string name="home_page_maFac">Ma Fac</string>
-    <string name="home_page_mesCours">Mes Cours</string>
-    <string name="home_page_parametres">Paramètres</string>
-    <string name="home_page_scan">Scan QR Code</string>
-
-    <string name="default_user_name">My user name</string>
+    <string name="home_page_map">Map</string>
+    <string name="home_page_map_desc">Retrieve points of interests</string>
+    <string name="home_page_timetable">Timetable</string>
+    <string name="home_page_timetable_desc">Timetable of your courses</string>
+    <string name="home_page_settings">Settings</string>
+    <string name="home_page_settings_desc">Settings of the app</string>
+    <string name="home_page_qrcode">QR Code</string>
+    <string name="home_page_qrcode_desc">Scan a QR to retrieve your documents</string>
 
 
     <!-- TIME TABLE -->
-    <string name="title_time_table">Mon Emploi du Temps</string>
+    <string name="title_time_table">My agenda</string>
     <string name="default_url_time_table">https://edt.univ-tlse3.fr/FSI/2017_2018/M2/M2_INF_DL/g251745.html</string>
 
 
