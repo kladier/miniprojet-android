@@ -34,8 +34,10 @@
         <activity android:name=".SettingsActivity"
             android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
         </activity>
-
         <activity android:name=".ScanQRCodeActivity"
+            android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
+        </activity>
+        <activity android:name=".InformationActivity"
             android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
         </activity>
 
