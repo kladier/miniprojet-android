@@ -1,8 +1,8 @@
 # Document d'architecture de l'application
 
-NOTE: Certain des diagrammes ci-dessous utilise [mermaid](https://mermaidjs.github.io). Vous devez vous prémunir d'un visualisateur fournis par un plugin de votre IDE  ou utiliser le [Mermaid Live Editor](https://mermaidjs.github.io/mermaid-live-editor) (Github est capable de faire la preview).
+NOTE: Les diagrammes ci-dessous ont été fait avec [mermaid](https://mermaidjs.github.io).
 
-## Structure des packages
+## Structure des _packages_
 
 ```java
 |-- app
@@ -20,11 +20,11 @@ NOTE: Certain des diagrammes ci-dessous utilise [mermaid](https://mermaidjs.gith
 |       `-- *.java
 ```
 
-Nous avons 3 packages:
+Nous avons 3 _packages_:
 
 - _models_
 
-Contient tout les `Data Access Objec` (DAO) utilisé dans l'application. C'est `Class` on pour but d'être sérialisé en base de donnée.
+Contient tous les `Data Access Objec` (DAO) utilisé dans l'application. Ces `Class` on pour but d'être sérialisée en base de donnée.
 
 - _utils_
 
@@ -36,22 +36,14 @@ Des interfaces offrant des services vers des services externes comme `Firebase`.
 
 ## Hiérarchie des activités
 
-```mermaid
-graph BT;
-    ReportAnomalyActivity-->MainActivity;
-    TimeTableActivity-->MainActivity;
-    MapActivity-->MainActivity;
-    SettingsActivity-->MainActivity;
-    ScanQRCodeActivity-->MainActivity;
-    AnomalyActivity-->MainActivity;
-    InformationActivity-->MainActivity;
-```
+![](./assets/graph.png)
 
-La `MainActivity` ne sert juste que d'interface home par laquelle on lance les autres activités.
-Pour isoler les contextes nous avons préféré utiliser des `AppCompatActivity` au lieu de `Fragment`.
+La `MainActivity` ne sert juste que de page d'accueil par laquelle, on lance les autres activités.
+Pour isoler les contextes, nous avons préféré utiliser des `AppCompatActivity` au lieu de `Fragment`.
 
 Toutes les activitées sont `Children` de `MainActivity`:
 
+_Voir cette exemple:_
 ```java
 <activity android:name=".*Activity"
     android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
@@ -59,7 +51,7 @@ Toutes les activitées sont `Children` de `MainActivity`:
 </activity>
 ```
 
-De plus, elle utilise un [Up Navigation](https://developer.android.com/training/implementing-navigation/ancestral.html) qui offre un bouton en forme de flêche sur la barre de `Menu` pour revenir à la `MainActivity`.
+De plus, elles utilisent un [Up Navigation](https://developer.android.com/training/implementing-navigation/ancestral.html) qui offre un bouton, en forme de flêche situé sur la barre de `Menu` pour revenir à la (page d'accueil) `MainActivity`.
 
 ### Librairies
 
@@ -74,46 +66,36 @@ Le SDK Android et sa librairie standard étant assez fournis. Nous avons fait le
 > maps si trop compliqué). On pourra rechercher un lieu et marquer un point
 > d’intéret.
 
-Nous avons décidé de partir sur `Google Map` car la librairie fournit par Google est plus simple à prendre en main, grâce à leur documentation complète.
+Nous avons fais le choix technique d'utiliser `Google Map`. La librairie fournit par Google est plus simple à prendre en main grâce à sa documentation complète.
 
-Les `point d’intéret` sont materialisés par des [Marker](https://developers.google.com/android/reference/com/google/android/gms/maps/model/Marker) fournit par Google Map.
+Les `points d’intérets` sont materialisés par des [Marker](https://developers.google.com/android/reference/com/google/android/gms/maps/model/Marker) fournit par Google Map.
 
-Pour la recherche de points d’intérets nous avons décidé d'utiliser [SearchView](https://developer.android.com/reference/android/widget/SearchView.html) fournis par le SDK pour avoir un bouton de recherche dans le `Menu` de notre `ActionBar`.
+Pour la recherche de points d’intérets, nous avons décidé d'utiliser [SearchView](https://developer.android.com/reference/android/widget/SearchView.html) fournis par le Android SDK pour avoir un bouton de recherche dans le `Menu` de notre `ActionBar`.
 
 
 #### Diagramme de séquence
 
-```mermaid
-sequenceDiagram
-    MapActivity->>GoogleMap: getMapAsync
-    GoogleMap-->>MapActivity: onMapReady
-    MapActivity->>Firebase: FetchPointOfInterest
-    Note over MapActivity, Firebase: Use an AsyncTask
-    Firebase-->>MapActivity: addMarkersFromPointOfInterests
-```
+![](./assets/map_activity.svg)
 
-NOTE: Les points d’intéret ne sont pour l'instant par sauvegardé sur `Firebase`.
+NOTE: Les points d’intérets ne sont pour l'instant par sauvegardés sur `Firebase`.
 
 ### TimeTableActivity
 
 > 2. Interrogation des EdT de l’Université : Interaction HTTP + Interface
 > Graphique
 
-Nous récupérons la view de l'emploi du temps de l'utilisateur dans un `WebView`.
-Une solution simple à mettre en place car les emplois du temps fournis par la fac peuvent être `embed`.
+Nous récupérons la _view_ de l'emploi du temps de l'utilisateur dans un `WebView`.
+Une solution simple à mettre en place car les emplois du temps fournis par la fac peuvent être: `embed`.
 
 #### Diagramme de séquence
 
-```mermaid
-sequenceDiagram
-    TimeTableActivity->>CelcatServer: loadUrl
-    CelcatServer-->>TimeTableActivity: HttpResponse
-```
+![](./assets/timetable.svg)
+
 
 ### ScanQRCodeActivity
 
-> 3. Information : Utilisation d’un QR Code qui afche une page web ou des
-> données d’une base FireBase (soit texte, index frebase, soit url et dans ce
+> 3. Information : Utilisation d’un QR Code qui affiche une page web ou des
+> données d’une base FireBase (soit texte, index firebase, soit url et dans ce
 > cas n’importe quel site).
 
 TODO
@@ -144,21 +126,14 @@ Nous récupérons la luminosité ambiante par l'API [SensorManager](https://deve
 
 ##### Diagramme de séquence:
 
-```mermaid
-sequenceDiagram
-    InformationActivity->>SensorManager: getSystemService(Context.SENSOR_SERVICE)
-    SensorManager-->>InformationActivity: SensorManager
-    InformationActivity->>SensorManager: getDefaultSensor(Sensor.TYPE_LIGHT)
-Note over InformationActivity,SensorManager: event happend
-SensorManager->>InformationActivity:onSensorChanged(sensorEvent)
-```
+![](./assets/info_activity.svg)
 
 #### niveau sonore
 
-Nous n'avons pas réussi à implementer cette feature. Nous avions pour idée d'utiliser un [MediaRecorder](https://developer.android.com/guide/topics/media/mediarecorder.html) dans une `AsyncTask` et d'utiliser la méthode [getMaxAmplitude](https://developer.android.com/reference/android/media/MediaRecorder.html#getMaxAmplitude()) pour récupérer le niveau sonore.
+Nous n'avons pas réussi à implementer cette feature. Nous avions pour idée d'utiliser un [MediaRecorder](https://developer.android.com/guide/topics/media/mediarecorder.html) dans une `AsyncTask` et d'utiliser sa méthode [getMaxAmplitude](https://developer.android.com/reference/android/media/MediaRecorder.html#getMaxAmplitude()) pour récupérer le niveau sonore.
 
 
-NOTE: Nous n'avons pas voulu mettre nos photos sur l'application donc nous avons mis une icone svg pour remplacer.
+NOTE: Nous n'avons pas voulu mettre nos photos sur l'application, donc nous avons mis une icone svg pour combler.
 
 
 ## Services externes
@@ -167,4 +142,4 @@ NOTE: Nous n'avons pas voulu mettre nos photos sur l'application donc nous avons
 
 ### Google Map accès
 
-Nous utilisons une [API Key](https://github.com/kladier/miniprojet-android/blob/1835a42fd5aa8f286532476b29b1501219efbc7f/app/src/main/AndroidManifest.xml#L44) pour charger la google map dans un `Fragment`. A l'heure actuelle la `key` n'est pas chiffré et il faudrait suivre ces [procédures](https://developers.google.com/maps/documentation/android-api/signup) pour la chiffrer avec un `SHA-1`.
+Nous utilisons une [API Key](https://github.com/kladier/miniprojet-android/blob/1835a42fd5aa8f286532476b29b1501219efbc7f/app/src/main/AndroidManifest.xml#L44) pour charger la google map dans un `Fragment`. Pour l'instant, la `key` n'est pas chiffré et il faudrait suivre ces [procédures](https://developers.google.com/maps/documentation/android-api/signup) pour la chiffrer avec en empreinte `SHA-1`.
