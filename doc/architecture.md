@@ -124,7 +124,7 @@ TODO
 
 Nous récupérons la luminosité ambiante par l'API [SensorManager](https://developer.android.com/reference/android/hardware/SensorManager.html).
 
-##### Diagramme de séquence:
+##### Diagramme de séquence:
 
 ![](./assets/info_activity.svg)
 
