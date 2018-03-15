@@ -24,7 +24,7 @@ Nous avons 3 _packages_:
 
 - _models_
 
-Contient tous les `Data Access Objec` (DAO) utilisé dans l'application. Ces `Class` on pour but d'être sérialisée en base de donnée.
+Contient tous les `Data Access Objec` (DAO) utilisés dans l'application. Ces `Class` ont pour but d'être sérialisées en base de données.
 
 - _utils_
 
@@ -38,12 +38,12 @@ Des interfaces offrant des services vers des services externes comme `Firebase`.
 
 ![](./assets/graph.png)
 
-La `MainActivity` ne sert juste que de page d'accueil par laquelle, on lance les autres activités.
+La `MainActivity`sert de page d'accueil par laquelle on lance les autres activités.
 Pour isoler les contextes, nous avons préféré utiliser des `AppCompatActivity` au lieu de `Fragment`.
 
 Toutes les activitées sont `Children` de `MainActivity`:
 
-_Voir cette exemple:_
+_Voir cet exemple:_
 ```java
 <activity android:name=".*Activity"
     android:parentActivityName="univ.pr.nj.keewitz.MainActivity">
@@ -51,13 +51,13 @@ _Voir cette exemple:_
 </activity>
 ```
 
-De plus, elles utilisent un [Up Navigation](https://developer.android.com/training/implementing-navigation/ancestral.html) qui offre un bouton, en forme de flêche situé sur la barre de `Menu` pour revenir à la (page d'accueil) `MainActivity`.
+De plus, elles utilisent un [Up Navigation](https://developer.android.com/training/implementing-navigation/ancestral.html) qui offre un bouton en forme de flêche, situé sur la barre de `Menu`, pour revenir à la (page d'accueil) `MainActivity`.
 
 ### Librairies
 
-Le SDK Android et sa librairie standard étant assez fournis. Nous avons fait le choix de se limiter à leurs utilisations et d'éviter des librairies externes écritent par des tiers.
+Le SDK Android et sa librairie standard étant assez fournis, nous avons fait le choix de se limiter à leurs utilisations et d'éviter des librairies externes écrites par des tiers.
 
-## Architecture des activitées
+## Architecture des activités
 
 ### MapActivity
 
@@ -66,9 +66,9 @@ Le SDK Android et sa librairie standard étant assez fournis. Nous avons fait le
 > maps si trop compliqué). On pourra rechercher un lieu et marquer un point
 > d’intéret.
 
-Nous avons fais le choix technique d'utiliser `Google Map`. La librairie fournit par Google est plus simple à prendre en main grâce à sa documentation complète.
+Nous avons fais le choix technique d'utiliser `Google Map`. La librairie fournie par Google est plus simple à prendre en main grâce à sa documentation complète.
 
-Les `points d’intérets` sont materialisés par des [Marker](https://developers.google.com/android/reference/com/google/android/gms/maps/model/Marker) fournit par Google Map.
+Les `points d’intérets` sont materialisés par des [Marker](https://developers.google.com/android/reference/com/google/android/gms/maps/model/Marker) fournis par Google Map.
 
 Pour la recherche de points d’intérets, nous avons décidé d'utiliser [SearchView](https://developer.android.com/reference/android/widget/SearchView.html) fournis par le Android SDK pour avoir un bouton de recherche dans le `Menu` de notre `ActionBar`.
 
@@ -77,7 +77,7 @@ Pour la recherche de points d’intérets, nous avons décidé d'utiliser [Searc
 
 ![](./assets/map_activity.svg)
 
-NOTE: Les points d’intérets ne sont pour l'instant par sauvegardés sur `Firebase`.
+NOTE: Les points d’intérets ne sont pour l'instant pas sauvegardés sur `Firebase`.
 
 ### TimeTableActivity
 
@@ -85,7 +85,7 @@ NOTE: Les points d’intérets ne sont pour l'instant par sauvegardés sur `Fire
 > Graphique
 
 Nous récupérons la _view_ de l'emploi du temps de l'utilisateur dans un `WebView`.
-Une solution simple à mettre en place car les emplois du temps fournis par la fac peuvent être: `embed`.
+Une solution simple à mettre en place car les emplois du temps fournis par l'université peuvent être: `embed`.
 
 #### Diagramme de séquence
 
@@ -133,7 +133,7 @@ Nous récupérons la luminosité ambiante par l'API [SensorManager](https://deve
 Nous n'avons pas réussi à implementer cette feature. Nous avions pour idée d'utiliser un [MediaRecorder](https://developer.android.com/guide/topics/media/mediarecorder.html) dans une `AsyncTask` et d'utiliser sa méthode [getMaxAmplitude](https://developer.android.com/reference/android/media/MediaRecorder.html#getMaxAmplitude()) pour récupérer le niveau sonore.
 
 
-NOTE: Nous n'avons pas voulu mettre nos photos sur l'application, donc nous avons mis une icone svg pour combler.
+NOTE: Nous n'avons pas voulu mettre nos photos sur l'application, nous les avons remplacées par une icône svg.
 
 
 ## Services externes
@@ -142,4 +142,4 @@ NOTE: Nous n'avons pas voulu mettre nos photos sur l'application, donc nous avon
 
 ### Google Map accès
 
-Nous utilisons une [API Key](https://github.com/kladier/miniprojet-android/blob/1835a42fd5aa8f286532476b29b1501219efbc7f/app/src/main/AndroidManifest.xml#L44) pour charger la google map dans un `Fragment`. Pour l'instant, la `key` n'est pas chiffré et il faudrait suivre ces [procédures](https://developers.google.com/maps/documentation/android-api/signup) pour la chiffrer avec en empreinte `SHA-1`.
+Nous utilisons une [API Key](https://github.com/kladier/miniprojet-android/blob/1835a42fd5aa8f286532476b29b1501219efbc7f/app/src/main/AndroidManifest.xml#L44) pour charger la google map dans un `Fragment`. Pour l'instant, la `key` n'est pas chiffrée et il faudrait suivre ces [procédures](https://developers.google.com/maps/documentation/android-api/signup) pour la chiffrer avec en empreinte `SHA-1`.

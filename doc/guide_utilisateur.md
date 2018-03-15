@@ -8,7 +8,7 @@ Une application pour faciliter votre vie d'étudiant sur le campus de l'Universi
 
 ➊ Trouver les points d'intérêts (Bibliothèque) sur le campus et chercher l'emplacement de vos salles de cours.
 
-➋ Modifier vos paramètres personnels qui seront utilisé par d'autres services de cette application.
+➋ Modifier vos paramètres personnels qui seront utilisés par d'autres services de cette application.
 
 ➌ Retrouver l'emploi du temps Celcat de vos cours.
 
@@ -37,7 +37,7 @@ Pour l'installer, il faudra la compiler directement avec les sources et installe
   - Localisation GPS et internet
   - Lire le stockage externe
 
-- Aucune publicités
+- Aucune publicité
 
 ## Licence
 
