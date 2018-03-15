@@ -66,7 +66,7 @@ Le SDK Android et sa librairie standard étant assez fournis, nous avons fait le
 > maps si trop compliqué). On pourra rechercher un lieu et marquer un point
 > d’intéret.
 
-Nous avons fais le choix technique d'utiliser `Google Map`. La librairie fournie par Google est plus simple à prendre en main grâce à sa documentation complète.
+Nous avons fait le choix technique d'utiliser `Google Map`. La librairie fournie par Google est plus simple à prendre en main grâce à sa documentation complète.
 
 Les `points d’intérets` sont materialisés par des [Marker](https://developers.google.com/android/reference/com/google/android/gms/maps/model/Marker) fournis par Google Map.
 
@@ -84,8 +84,8 @@ NOTE: Les points d’intérets ne sont pour l'instant pas sauvegardés sur `Fire
 > 2. Interrogation des EdT de l’Université : Interaction HTTP + Interface
 > Graphique
 
-Nous récupérons la _view_ de l'emploi du temps de l'utilisateur dans un `WebView`.
-Une solution simple à mettre en place car les emplois du temps fournis par l'université peuvent être: `embed`.
+Nous récupérons la _view_ de l'emploi du temps de l'utilisateur dans un `WebView`,
+une solution simple à mettre en place car les emplois du temps fournis par l'université peuvent être: `embed`.
 
 #### Diagramme de séquence
 
