@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,7 +91,9 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                     SparseArray<Barcode> barcodes = detector.detect(frame);
                     for (int index = 0; index < barcodes.size(); index++) {
                         Barcode code = barcodes.valueAt(index);
-                        scanResults.setText(scanResults.getText() + code.displayValue + "\n");
+                        scanResults.setText(code.displayValue);
+
+                        displayPdfInFrame(code.displayValue);
 
                         //Required only if you need to extract the type of barcode
                         int type = barcodes.valueAt(index).valueFormat;
@@ -188,5 +192,27 @@ public class ScanQRCodeActivity extends AppCompatActivity {
 
         return BitmapFactory.decodeStream(ctx.getContentResolver()
                 .openInputStream(uri), null, bmOptions);
+    }
+
+    private void displayPdfInFrame(String url) {
+        WebView wb = findViewById(R.id.pdf_webview);
+        wb.setBackgroundColor(0x00000000);
+        wb.getSettings().setJavaScriptEnabled(true);
+        wb.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        if (url == null || url.isEmpty()) {
+            Log.w("ScanQRCodeActivity", "Error URL empty or null");
+        }
+
+        String url_with_google_viewer = "http://docs.google.com/gview?embedded=true&url="+url;
+        wb.loadUrl(url_with_google_viewer );
     }
 }
