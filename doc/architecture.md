@@ -87,6 +87,9 @@ NOTE: Les points d’intérets ne sont pour l'instant pas sauvegardés sur `Fire
 Nous récupérons la _view_ de l'emploi du temps de l'utilisateur dans un `WebView`,
 une solution simple à mettre en place car les emplois du temps fournis par l'université peuvent être: `embed`.
 
+L'emploi du temps affiché est selon la formation choisie dans les Settings.
+
+
 #### Diagramme de séquence
 
 ![](./assets/timetable.svg)
@@ -98,7 +101,14 @@ une solution simple à mettre en place car les emplois du temps fournis par l'un
 > données d’une base FireBase (soit texte, index firebase, soit url et dans ce
 > cas n’importe quel site).
 
-TODO
+En cliquant sur QrCode depuis la page d'accueil, l'appareil photo se lance pour vous permettre de prendre en photo un QRCode correspondant à un cours en ligne.
+
+Une fois la photo prise et si le QRCode est correctement détecté, le cours s'affiche directement sur l'application via une WebView.
+On se sert du visualisateur PDF en ligne proposé par Google.
+
+Trois exemples de QRCode correspondant à un cours en ligne au format PDF sont disponibles, à titre d'exemple dans le dossier "app/res/drawable"
+
+Remarque : le BarcodeScanner proposé par Android est peu performant, il faut parfois s'y prendre à plusieurs reprises pour que le QRCode soit détecté. 
 
 ### ReportAnomalyActivity
 
@@ -119,8 +129,15 @@ Le dessin de rectangle pour préciser la zone n'a pas été implementé. La géo
 > 5. Confguration : Si vous devez mettre des informations
 > (login/mdp/formation/url de l’edt/...)
 
-TODO
+Deux réglages sont possibles : 
 
+    1) le nom d'utilisateur (qui est affiché dans la home page)
+
+    2) une formation (à titre d'exemple, 3 sont proposées : M2 DL, M1 DL et L3 info)
+    
+Remarque 1 : un bug que nous n'avons pas réglé est que si l'on change de formation et qu'on revient dans les Settings, c'est la formation M2 DL qui est proposé par défaut dans le formulaire (à la place de la formation préalablement choisie).
+
+Remarque 2 : il n'y a pas de bouton de validation, les changements sont pris en compte directement et il suffit de revenir sur la home page pour continuer sa navigation dans l'application.
 
 ### InformationActivity
 
