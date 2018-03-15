@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.pr.nj.keewitz.models.PointOfInterest;
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
 import univ.pr.nj.keewitz.utils.PermissionUtils;
 
 public class MapActivity extends AppCompatActivity
@@ -74,7 +75,7 @@ public class MapActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         Toast.makeText(this, R.string.help, Toast.LENGTH_LONG).show();
-
+        initFirebaseBuildings();
         new FetchPointOfInterest().execute();
     }
 
@@ -140,7 +141,7 @@ public class MapActivity extends AppCompatActivity
                     String name = recordNameInput.getText().toString();
                     PointOfInterest pi = new PointOfInterest(latLng, name);
                     pointsOfInterests.add(pi);
-                    // TODO save the point of interest in firebase
+                    pi.sendInfosToFirebase();
                     addMarkerToMap(pi.getPosition(), pi.getName());
                 }
             })
@@ -261,6 +262,20 @@ public class MapActivity extends AppCompatActivity
         return null;
     }
 
+    private void initFirebaseBuildings(){
+        FirebaseUtils.writeValue("43.5603773", "buildings", "u1", "lat");
+        FirebaseUtils.writeValue("1.4707398", "buildings", "u1", "lng");
+        FirebaseUtils.writeValue("43.5608447", "buildings", "u2", "lat");
+        FirebaseUtils.writeValue("1.4704827", "buildings", "u2", "lng");
+        FirebaseUtils.writeValue("43.5608052", "buildings", "u3", "lat");
+        FirebaseUtils.writeValue("1.4699231", "buildings", "u3", "lng");
+        FirebaseUtils.writeValue("43.5628344", "buildings", "u4", "lat");
+        FirebaseUtils.writeValue("1.4690326", "buildings", "u4", "lng");
+        FirebaseUtils.writeValue("43.5638412", "buildings", "library_of_science", "lat");
+        FirebaseUtils.writeValue("1.465313", "buildings", "library_of_science", "lng");
+        FirebaseUtils.writeValue("43.56226", "buildings", "restaurant_1", "lat");
+        FirebaseUtils.writeValue("1.4634004", "buildings", "restaurant_1", "lng");
+    }
 
     /**
      * Retrieve the points of interests in a async way from a external services (Firebase).

@@ -2,6 +2,8 @@ package univ.pr.nj.keewitz.models;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
+
 /**
  * A point of interest saved on the map.
  */
@@ -22,5 +24,9 @@ public class PointOfInterest {
 
     public String getName() {
         return name;
+    }
+
+    public void sendInfosToFirebase(){
+        FirebaseUtils.writeValue(position.toString(), "pointsOfInterest", name);
     }
 }
