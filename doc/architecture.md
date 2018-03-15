@@ -107,6 +107,13 @@ TODO
 > tracer une boite pour préciser l’endroit sur l’image. Le tout est envoyé sur
 > une base FireBase en basse résolution.
 
+Un spinner permet de choisir parmi les 3 niveaux de criticité. Un bouton permet de prendre une photo, qui est ensuite affichée au milieu de l'écran.
+Elle est mise à jour à chaque fois que l'on prend une nouvelle photo.
+Si aucune photo n'a été prise, on affiche un message d'erreur lorsque l'utilisateur appuie sur le bouton de soumission. Sinon, il renvoie au menu principal, et stocke la photo dans le stockage Firebase.
+Dans la base de données, on stocke aussi le nom de l'image, ainsi que le niveau de criticité et l'url de l'image dans le stockage Firebase.
+
+Le dessin de rectangle pour préciser la zone n'a pas été implementé. La géolocalisation de la photo n'est pas non plus récupérée et donc stockée, mais il y a en place les éléments permettant de le faire.
+
 ### SettingsActivity
 
 > 5. Confguration : Si vous devez mettre des informations
