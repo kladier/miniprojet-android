@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,8 +36,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         qrcode.setOnClickListener(this);
         infos.setOnClickListener(this);
 
-        this.exampleFirebase();
+        this.setUsername();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        this.setUsername();
+    }
+
+    public void setUsername() {
+        FirebaseUtils.readValue(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                TextView txtViewUserName = findViewById(R.id.username);
+                txtViewUserName.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }, "username");
     }
 
     @Override
@@ -60,21 +82,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 Log.d(this.getClass().getCanonicalName(), "You forgot to set the startActivity binding with your new button");
         }
-    }
-
-    public void exampleFirebase() {
-        FirebaseUtils.writeValue("myValue", "level1", "level2");
-
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Log.w("MainActivity.class", (String)snapshot.getValue());
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-
-        FirebaseUtils.readValue(valueEventListener, "level1", "level2");
     }
 }

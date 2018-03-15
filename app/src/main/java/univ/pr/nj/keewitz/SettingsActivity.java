@@ -3,11 +3,15 @@ package univ.pr.nj.keewitz;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import univ.pr.nj.keewitz.timetable.CustomOnItemSelectedListener;
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -27,6 +31,25 @@ public class SettingsActivity extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+
+
+        final EditText t = findViewById(R.id.editText3);
+        t.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                FirebaseUtils.writeValue( t.getText().toString(), "username");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -36,8 +59,6 @@ public class SettingsActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.spinner:
-
         }
         return super.onOptionsItemSelected(item);
     }

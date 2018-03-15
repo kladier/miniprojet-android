@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">KEEWITZ</string>
 
+    <string name="default_username">My username</string>
+
     <!-- HOME MENU -->
     <string name="home_page_map">Map</string>
     <string name="home_page_map_desc">Retrieve points of interests</string>
