@@ -2,13 +2,13 @@ package univ.pr.nj.keewitz.utils;
 
 import android.net.Uri;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 
 public final class FirebaseUtils {
@@ -17,11 +17,12 @@ public final class FirebaseUtils {
 
     public FirebaseUtils(){}
 
-    public static UploadTask putFile(String reference, Uri fileUri){
+    public static StorageReference putFile(String reference, Uri fileUri, OnSuccessListener successListener){
         mAuth.signInAnonymously();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference(reference);
-        return storageReference.putFile(fileUri);
+        storageReference.putFile(fileUri).addOnSuccessListener(successListener);
+        return storageReference;
     }
 
     public static void writeValue(String value, String... path){
