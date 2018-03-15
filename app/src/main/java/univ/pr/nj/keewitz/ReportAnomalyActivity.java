@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,15 +18,22 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.File;
+
+import univ.pr.nj.keewitz.models.Anomaly;
 import univ.pr.nj.keewitz.utils.FirebaseUtils;
 
 
 public class ReportAnomalyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Uri imageUri;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private String criticity;
+    private Uri imageUri;
+    private String fileName;
+    private Anomaly anomaly = new Anomaly();
 
 
     @Override
@@ -39,6 +47,7 @@ public class ReportAnomalyActivity extends AppCompatActivity implements AdapterV
         StrictMode.setVmPolicy(builder.build());
         addListenerOnSpinnerItemSelection();
         addListenerOnButtons();
+        fileName = getFileName();
     }
 
     public void takePhoto() {
@@ -76,7 +85,7 @@ public class ReportAnomalyActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
-        criticity = parent.getItemAtPosition(pos).toString();
+        anomaly.setCriticity(parent.getItemAtPosition(pos).toString());
     }
 
     @Override
@@ -88,8 +97,15 @@ public class ReportAnomalyActivity extends AppCompatActivity implements AdapterV
             @Override
             public void onClick(View v) {
                 if (imageUri != null){
-                    Long timestamp = System.currentTimeMillis()/1000;
-                    FirebaseUtils.putFile("anomalies/"+criticity.toLowerCase()+"/img-"+timestamp.toString()+".png", imageUri);
+                    OnSuccessListener successListener = new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                        {
+                            anomaly.setUrlImage(taskSnapshot.getDownloadUrl().toString());
+                            anomaly.sendInfosToFirebase(fileName);
+                        }
+                    };
+                    StorageReference stRef = FirebaseUtils.putFile("anomalies/" + anomaly.getCriticity().toLowerCase() + "/" + fileName  + ".png", imageUri, successListener);
                     goToMain();
                 } else {
                     toastNoImage();
@@ -105,6 +121,12 @@ public class ReportAnomalyActivity extends AppCompatActivity implements AdapterV
                 takePhoto();
             }
         });
+    }
+
+    @NonNull
+    private String getFileName() {
+        Long timestamp = System.currentTimeMillis()/1000;
+        return "img-" + timestamp.toString();
     }
 
     private void toastNoImage(){
