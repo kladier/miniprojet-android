@@ -29,6 +29,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -117,7 +118,11 @@ public class MapActivity extends AppCompatActivity
     public void onMapReady(GoogleMap map) {
         gMap = map;
         gMap.setOnMapClickListener(this);
-        zoomOnPositionWithCamera(UPS_LAT, UPS_LGT);
+        CameraPosition newCamPos = new CameraPosition(new LatLng(UPS_LAT,UPS_LGT),
+        DEFAULT_ZOOM_LEVEL,
+                map.getCameraPosition().tilt,
+                map.getCameraPosition().bearing);
+        gMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 4000, null);
         enableMyLocation();
     }
 
