@@ -16,8 +16,15 @@
 
     <!-- TIME TABLE -->
     <string name="title_time_table">My agenda</string>
-    <string name="default_url_time_table">https://edt.univ-tlse3.fr/FSI/2017_2018/M2/M2_INF_DL/g251745.html</string>
-
+    <string name="timetable_url_m2dl">https://edt.univ-tlse3.fr/FSI/2017_2018/M2/M2_INF_DL/g251745.html</string>
+    <string name="timetable_url_m1dl">https://edt.univ-tlse3.fr/FSI/2017_2018/M1/M1_INF_DL/g241675.html</string>
+    <string name="timetable_url_l3info">https://edt.univ-tlse3.fr/FSI/2017_2018/L3/L3_Info/g235934.html</string>
+    <string-array name="formation">
+        <item>M2 DL</item>
+        <item>M1 DL</item>
+        <item>L3 info</item>
+    </string-array>
+    <string name="timetableUrl">timetableUrl</string>
 
     <!-- MENU -->
     <string name="search">Search</string>

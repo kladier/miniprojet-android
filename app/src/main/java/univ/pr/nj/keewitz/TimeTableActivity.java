@@ -1,10 +1,17 @@
 package univ.pr.nj.keewitz;
 
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import univ.pr.nj.keewitz.utils.FirebaseUtils;
 
 public class TimeTableActivity extends AppCompatActivity {
 
@@ -15,18 +22,29 @@ public class TimeTableActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        WebView wb = (WebView) findViewById(R.id.time_table);
+        final WebView wb = (WebView) findViewById(R.id.time_table);
         wb.getSettings().setJavaScriptEnabled(true);
 
-        // Google Calendar For M2DL
-        //wb.loadUrl("https://calendar.google.com/calendar/embed?src=master.developpement.logiciel@gmail.com&color=%23668CD9&mode=WEEK&ctz=Europe/Paris&showTitle=0&showNav=1&showDate=1&showTabs=1&showCalendars=0&hl=fr");
+        String pathToTimeTableUrl = getString(R.string.timetableUrl);
 
         // Celcat Calendar For M2DL
-        String url = getResources().getString(R.string.default_url_time_table);
+        FirebaseUtils.readValue(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Log.w("TimeTableActivity.class", "Time table URL : "+snapshot.getValue().toString());
+                wb.loadUrl(snapshot.getValue().toString());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        },pathToTimeTableUrl);
+
+       /* String url = getResources().getString(R.string.default_url_time_table);
         if (url == null || url.isEmpty()) {
             url = getResources().getString(R.string.default_url_time_table);
         }
-        wb.loadUrl(url);
+        wb.loadUrl(url);*/
     }
 
     @Override
