@@ -27,6 +27,7 @@ public class PointOfInterest {
     }
 
     public void sendInfosToFirebase(){
-        FirebaseUtils.writeValue(position.toString(), "pointsOfInterest", name);
+        FirebaseUtils.writeValue(String.valueOf(position.latitude), "pointsOfInterest", name, "lat");
+        FirebaseUtils.writeValue(String.valueOf(position.longitude), "pointsOfInterest", name, "lng");
     }
 }
