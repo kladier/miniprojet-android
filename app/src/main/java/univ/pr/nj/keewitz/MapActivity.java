@@ -32,9 +32,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import univ.pr.nj.keewitz.models.PointOfInterest;
 import univ.pr.nj.keewitz.utils.FirebaseUtils;
@@ -76,7 +81,33 @@ public class MapActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
         Toast.makeText(this, R.string.help, Toast.LENGTH_LONG).show();
         initFirebaseBuildings();
-        new FetchPointOfInterest().execute();
+        initMarkersFromFirebase("buildings");
+        initMarkersFromFirebase("pointsOfInterest");
+//        new FetchPointOfInterest().execute();
+    }
+
+    private void initMarkersFromFirebase(String path) {
+        FirebaseUtils.readValue(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap res = (HashMap) dataSnapshot.getValue();
+                if (res != null) {
+                    for(Object o : res.keySet())
+                    {
+                        if (o != null) {
+                            String name = (String) o;
+                            HashMap hm = (HashMap)res.get(name);
+                            Double lat = Double.parseDouble((String)hm.get("lat"));
+                            Double lng = Double.parseDouble((String)hm.get("lng"));
+                            PointOfInterest pi = new PointOfInterest(new LatLng(lat,lng), name);
+                            addMarkerToMap(pi.getPosition(), pi.getName());
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        }, path);
     }
 
     @Override
